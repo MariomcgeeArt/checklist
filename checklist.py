@@ -14,7 +14,7 @@ def create(item):
 # # READ
 def read(index):
     return checklist[index]
-
+C
 # UPDATE
 def update(index, item):
     checklist[index] = item
@@ -40,35 +40,55 @@ def list_all_items():
 
     
 def select(function_code):
-    # Create item
-    if function_code == "C":
-        input_item = user_input("Input item:")
-        create(input_item)
-        
-
-    # Read item
-    elif function_code == "R":
-        item_index = user_input("Index Number?")
-        read(int(item_index))
-
-        # Remember that item_index must actually exist or our program will crash.
-        # read(item_index)
-
-    # Print all items
-    elif function_code == "P":
-        list_all_items()
+    try:
 
 
-    # this may be the place where the code needs some restructering 
-    
-    elif function_code == "Q":
-        # This is where we want to stop our loop
-        return False
-    ## indent may be needed 
-    # Catch all
-    else:
-        print("Unknown Option")
-    return True    
+        # Create item
+        if function_code.upper() == "C":
+            input_item = user_input("Input item:")
+            create(input_item)
+            
+
+        # Read item
+        elif function_code.upper() == "R":
+            item_index = user_input("Index Number?")
+            print(read(int(item_index)))
+            
+
+            # Remember that item_index must actually exist or our program will crash.
+            # read(item_index)
+
+        # Print all items
+        elif function_code.upper() == "P":
+            list_all_items()
+    #3
+
+        # this may be the place where the code needs some restructering 
+        elif function_code.upper() =="D":
+            item_index =int(user_input("Select item to Delete"))
+            destroy(item_index)
+
+
+
+        elif function_code.upper() =="U":
+
+            item_index =int(user_input("Select item to Update"))
+            item_update =user_input("NEW ITEM")
+            update(item_index,item_update)
+
+
+
+
+
+
+        elif function_code.upper() == "Q":
+            return False
+        else:
+            print("Unknown Option")
+        return True
+    except:
+        print("stop fucking up")
+        return True    
 
 
 def user_input(prompt):
@@ -123,6 +143,6 @@ def test():
 running = True
 while running:
     selection = user_input(
-        "Press C to add to list, R to Read from list, P to display list, and Q to quit")
+        "Press C to add to list, R to Read from list, P to display list, U to Update item, D to delete from list, and Q to quit")
     running = select(selection)
  
